@@ -34,20 +34,31 @@ const resetGame=()=>{
     })
     turnO=true;
 }
+const checkDraw=()=>{
+    if([...boxes].every(box => box.innerText !== "")){
+        alert("It's a draw!");
+        boxes.forEach((box)=>{
+            box.disabled=true;
+        })
+    }
+}
 
 boxes.forEach((box)=>{
     box.addEventListener("click",()=>{
         console.log("box was clicked");
         if(turnO){
             box.innerText="O";
+            box.style.color="red";
             turnO=false;
         }
         else{
             box.innerText="X";
+            box.style.color="blue";
             turnO=true;
         }
         box.disabled=true;
         checkWin();
+        checkDraw();
         
     })
     resetButton.addEventListener("click",()=>{
